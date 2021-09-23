@@ -1,5 +1,4 @@
-package com.taghavi.forecastmvvmtest.data.response
-
+package com.taghavi.forecastmvvmtest.data.db.entity
 
 import com.google.gson.annotations.SerializedName
 

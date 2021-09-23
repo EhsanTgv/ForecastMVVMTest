@@ -1,8 +1,12 @@
-package com.taghavi.forecastmvvmtest.data.response
+package com.taghavi.forecastmvvmtest.data.db.entity
 
-
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+const val CURRENT_WEATHER_ID = 0
+
+@Entity(tableName = "current_weather")
 data class Current(
     @SerializedName("cloudcover")
     val cloudcover: Int,
@@ -36,4 +40,7 @@ data class Current(
     val windDir: String,
     @SerializedName("wind_speed")
     val windSpeed: Int
-)
+) {
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = CURRENT_WEATHER_ID
+}
