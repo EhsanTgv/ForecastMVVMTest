@@ -1,6 +1,8 @@
-package com.taghavi.forecastmvvmtest.data
+package com.taghavi.forecastmvvmtest.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.taghavi.forecastmvvmtest.data.network.ConnectivityInterceptor
+import com.taghavi.forecastmvvmtest.data.network.ConnectivityInterceptorImpl
 import com.taghavi.forecastmvvmtest.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -20,7 +22,7 @@ interface ApixuWeatherApiService {
     ): Deferred<CurrentWeatherResponse>
 
     companion object {
-        operator fun invoke(): ApixuWeatherApiService {
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): ApixuWeatherApiService {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain
                     .request()
@@ -41,6 +43,7 @@ interface ApixuWeatherApiService {
             val okHttpClient = OkHttpClient
                 .Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit
