@@ -8,7 +8,8 @@ import com.taghavi.forecastmvvmtest.data.db.entity.Current
 
 @Database(
     entities = [Current::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class ForecastDatabase : RoomDatabase() {
     abstract fun currentWeatherDao(): CurrentWeatherDao

@@ -57,14 +57,14 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             updateLocation("London")
             updateDateToToday()
             updateTemperatures(it.temperature, it.feelsLikeTemperature)
-            updateCondition(it.conditionText)
+//            updateCondition(it.conditionText)
             updatePrecipitation(it.precipitationVolume)
-            updateWind(it.windDirection, it.windSpeed)
+//            updateWind(it.windDirection, it.windSpeed)
             updateVisibility(it.visibilityDistance)
 
-            GlideApp.with(this@CurrentWeatherFragment)
-                .load("http:${it.conditionIconUrl}")
-                .into(binding.imageViewConditionIcon)
+//            GlideApp.with(this@CurrentWeatherFragment)
+//                .load("http:${it.conditionIconUrl}")
+//                .into(binding.imageViewConditionIcon)
         })
     }
 
