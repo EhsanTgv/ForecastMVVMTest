@@ -4,6 +4,8 @@ import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.taghavi.forecastmvvmtest.data.db.ForecastDatabase
 import com.taghavi.forecastmvvmtest.data.network.*
+import com.taghavi.forecastmvvmtest.data.provider.LocationProvider
+import com.taghavi.forecastmvvmtest.data.provider.LocationProviderImpl
 import com.taghavi.forecastmvvmtest.data.repository.ForecastRepository
 import com.taghavi.forecastmvvmtest.data.repository.ForecastRepositoryImpl
 import com.taghavi.forecastmvvmtest.ui.weather.current.CurrentWeatherViewModelFactory
@@ -21,10 +23,12 @@ class ForecastApp : Application(), KodeinAware {
 
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
+        bind() from singleton { instance<ForecastDatabase>().weatherLocationDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { ApixuWeatherApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
+        bind<LocationProvider>() with singleton { LocationProviderImpl(instance(),instance()) }
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(),instance(),instance()) }
         bind() from provider { CurrentWeatherViewModelFactory(instance()) }
     }
 
